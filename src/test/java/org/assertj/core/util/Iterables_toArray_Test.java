@@ -20,7 +20,6 @@ import static org.assertj.core.util.Lists.newArrayList;
 
 import java.util.ArrayList;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -28,7 +27,6 @@ import org.junit.Test;
  * 
  * @author Jean-Christophe Gay
  */
-@Ignore
 public class Iterables_toArray_Test {
 
   private final ArrayList<String> values = newArrayList("one", "two");;
