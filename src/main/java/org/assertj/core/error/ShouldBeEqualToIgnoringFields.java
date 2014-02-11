@@ -91,7 +91,7 @@ public class ShouldBeEqualToIgnoringFields extends BasicErrorMessageFactory {
 		this.comparismOptionalMessage = comparismOptionalMessage;
 	}
 
-	private static final String EXPECTED_DELIMITER = "__EX__";
+	private static final String EXPECTED_DELIMITER = "\n__EX__";
 
 	private static final String ACTUAL_DELIMITER = "__AC__";
 
@@ -102,7 +102,7 @@ public class ShouldBeEqualToIgnoringFields extends BasicErrorMessageFactory {
 		String left = generateMessage(actual, rejectedFields, expectedValues);
 		String right = generateMessage(actual, rejectedFields, rejectedValues);
 
-		return "\n" + EXPECTED_DELIMITER + left + ACTUAL_DELIMITER + right+END_DELIMITER;
+		return EXPECTED_DELIMITER + left + ACTUAL_DELIMITER + right+END_DELIMITER;
 	}
 
 	private static String generateMessage(Object object, List<String> fields, List<Object> values) {
