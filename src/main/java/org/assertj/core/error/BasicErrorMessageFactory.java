@@ -1,21 +1,19 @@
 /*
  * Created on Oct 18, 2010
  * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the
+ * License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
- * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  * 
  * Copyright @2010-2011 the original author or authors.
  */
 package org.assertj.core.error;
 
 import static java.lang.String.format;
-
 import static org.assertj.core.util.Arrays.format;
 import static org.assertj.core.util.Objects.HASH_CODE_PRIME;
 import static org.assertj.core.util.Objects.areEqual;
@@ -37,134 +35,141 @@ import org.assertj.core.util.VisibleForTesting;
  */
 public class BasicErrorMessageFactory implements ErrorMessageFactory {
 
-  protected final String format;
-  protected final Object[] arguments;
+	protected final String format;
 
-  @VisibleForTesting
-  MessageFormatter formatter = MessageFormatter.instance();
+	protected final Object[] arguments;
 
-  /**
-   * To avoid quoted String in message format.
-   */
-  private static class UnquotedString implements CharSequence {
+	@VisibleForTesting
+	MessageFormatter formatter = MessageFormatter.instance();
 
-    private final String string;
+	/**
+	 * Formatted text message for expect and actual values visible in Eclipse IDE
+	 */
+	protected String comparismOptionalMessage;
 
-    private UnquotedString(String string) {
-      if (string == null) {
-        throw new NullPointerException("string is mandatory");
-      }
-      this.string = string;
-    }
+	/**
+	 * To avoid quoted String in message format.
+	 */
+	private static class UnquotedString implements CharSequence {
 
-    @Override
-    public int length() {
-      return string.length();
-    }
+		private final String string;
 
-    @Override
-    public char charAt(int index) {
-      return string.charAt(index);
-    }
+		private UnquotedString(String string) {
+			if (string == null) {
+				throw new NullPointerException("string is mandatory");
+			}
+			this.string = string;
+		}
 
-    @Override
-    public CharSequence subSequence(int start, int end) {
-      return string.subSequence(start, end);
-    }
+		@Override
+		public int length() {
+			return string.length();
+		}
 
-    @Override
-    public String toString() {
-      return string;
-    }
+		@Override
+		public char charAt(int index) {
+			return string.charAt(index);
+		}
 
-    @Override
-    public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + ((string == null) ? 0 : string.hashCode());
-      return result;
-    }
+		@Override
+		public CharSequence subSequence(int start, int end) {
+			return string.subSequence(start, end);
+		}
 
-    @Override
-    public boolean equals(Object obj) {
-      if (this == obj)
-        return true;
-      if (obj == null)
-        return false;
-      if (getClass() != obj.getClass())
-        return false;
-      UnquotedString other = (UnquotedString) obj;
-      if (string == null) {
-        if (other.string != null)
-          return false;
-      } else if (!string.equals(other.string))
-        return false;
-      return true;
-    }
-  }
+		@Override
+		public String toString() {
+			return string;
+		}
 
-  /**
-   * Creates a new </code>{@link BasicErrorMessageFactory}</code>.
-   * 
-   * @param format the format string.
-   * @param arguments arguments referenced by the format specifiers in the format string.
-   */
-  public BasicErrorMessageFactory(String format, Object... arguments) {
-    this.format = format;
-    this.arguments = arguments;
-  }
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((string == null) ? 0 : string.hashCode());
+			return result;
+		}
 
-  /** {@inheritDoc} */
-  @Override
-  public String create(Description d, Representation representation) {
-    return formatter.format(d, representation, format, arguments);
-  }
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			UnquotedString other = (UnquotedString) obj;
+			if (string == null) {
+				if (other.string != null)
+					return false;
+			} else if (!string.equals(other.string))
+				return false;
+			return true;
+		}
+	}
 
-  /** {@inheritDoc} */
-  @Override
-  public String create() {
-    return formatter.format(EmptyTextDescription.emptyText(), new StandardRepresentation(), format, arguments);
-  }
+	/**
+	 * Creates a new </code>{@link BasicErrorMessageFactory}</code>.
+	 * 
+	 * @param format
+	 *            the format string.
+	 * @param arguments
+	 *            arguments referenced by the format specifiers in the format string.
+	 */
+	public BasicErrorMessageFactory(String format, Object... arguments) {
+		this.format = format;
+		this.arguments = arguments;
+	}
 
-  /**
-   * Return a string who will be unquoted in message format (without '')
-   * 
-   * @param string the string who will be unquoted.
-   * @return an unquoted string in message format. {@see ToString.quote}
-   */
-  protected static CharSequence unquotedString(String string) {
-    return new UnquotedString(string);
-  }
+	/** {@inheritDoc} */
+	@Override
+	public String create(Description d, Representation representation) {
+		return formatter.format(d, representation, format, arguments) + comparismOptionalMessage;
+	}
 
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    BasicErrorMessageFactory other = (BasicErrorMessageFactory) obj;
-    if (!areEqual(format, other.format))
-      return false;
-    // because it does not manage array recursively, don't use : Arrays.equals(arguments, other.arguments);
-    // example if arguments[1] and other.arguments[1] are logically same arrays but not same object, it will return
-    // false
-    return areEqual(arguments, other.arguments);
-  }
+	/** {@inheritDoc} */
+	@Override
+	public String create() {
+		return formatter.format(EmptyTextDescription.emptyText(), new StandardRepresentation(), format, arguments);
+	}
 
-  @Override
-  public int hashCode() {
-    int result = 1;
-    result = HASH_CODE_PRIME * result + hashCodeFor(format);
-    result = HASH_CODE_PRIME * result + Arrays.hashCode(arguments);
-    return result;
-  }
+	/**
+	 * Return a string who will be unquoted in message format (without '')
+	 * 
+	 * @param string
+	 *            the string who will be unquoted.
+	 * @return an unquoted string in message format. {@see ToString.quote}
+	 */
+	protected static CharSequence unquotedString(String string) {
+		return new UnquotedString(string);
+	}
 
-  @Override
-  public String toString() {
-    return format("%s[format=%s, arguments=%s]", getClass().getSimpleName(), quote(format),
-        format(new StandardRepresentation(), arguments));
-  }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BasicErrorMessageFactory other = (BasicErrorMessageFactory) obj;
+		if (!areEqual(format, other.format))
+			return false;
+		// because it does not manage array recursively, don't use : Arrays.equals(arguments, other.arguments);
+		// example if arguments[1] and other.arguments[1] are logically same arrays but not same object, it will return
+		// false
+		return areEqual(arguments, other.arguments);
+	}
 
+	@Override
+	public int hashCode() {
+		int result = 1;
+		result = HASH_CODE_PRIME * result + hashCodeFor(format);
+		result = HASH_CODE_PRIME * result + Arrays.hashCode(arguments);
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		return format("%s[format=%s, arguments=%s]", getClass().getSimpleName(), quote(format), format(new StandardRepresentation(), arguments));
+	}
 }
