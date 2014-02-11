@@ -52,7 +52,12 @@ public class ShouldBeEqualIgnoringGivenFields_create_Test {
                                   "but were:\n" +
                                   "  <[\"Yoda\", \"blue\"]>\n" +
                                   "in <Yoda the Jedi>.\n" +
-                                  "Comparison was performed on all fields but <[\"someIgnoredField\"]>");
+                                  "Comparison was performed on all fields but <[\"someIgnoredField\"]>"
+                                  +"\n"
+                                  +"__EX__org.assertj.core.test.Jedi\n" + 
+                                  "↳ name = [Yoda]↳ lightSaberColor = [green]__AC__org.assertj.core.test.Jedi\n" + 
+                                  "↳ name = [Yoda]↳ lightSaberColor = [blue]__EN__"
+    		);
   }
 
   @Test
@@ -64,7 +69,12 @@ public class ShouldBeEqualIgnoringGivenFields_create_Test {
     assertThat(message).isEqualTo("[Test] \n" +
                                   "Expecting value <\"green\"> in field <\"lightSaberColor\"> " +
                                   "but was <\"blue\"> in <Yoda the Jedi>.\n" +
-                                  "Comparison was performed on all fields but <[\"someIgnoredField\"]>");
+                                  "Comparison was performed on all fields but <[\"someIgnoredField\"]>"
+                                  +"\n"
+                                  +"__EX__org.assertj.core.test.Jedi\n" + 
+                                  "↳ lightSaberColor = [green]__AC__org.assertj.core.test.Jedi\n" + 
+                                  "↳ lightSaberColor = [blue]__EN__"
+    		);
   }
 
   @Test
@@ -81,7 +91,12 @@ public class ShouldBeEqualIgnoringGivenFields_create_Test {
                                   "but were:\n" +
                                   "  <[\"Yoda\", \"blue\"]>\n" +
                                   "in <Yoda the Jedi>.\n" +
-                                  "Comparison was performed on all fields");
+                                  "Comparison was performed on all fields"
+                                  +"\n"
+                                  +"__EX__org.assertj.core.test.Jedi\n" + 
+                                  "↳ name = [Yoda]↳ lightSaberColor = [green]__AC__org.assertj.core.test.Jedi\n" + 
+                                  "↳ name = [Yoda]↳ lightSaberColor = [blue]__EN__"
+    		);
   }
 
   @Test
@@ -94,7 +109,12 @@ public class ShouldBeEqualIgnoringGivenFields_create_Test {
     assertThat(message).isEqualTo("[Test] \nExpecting value <\"green\"> " +
                                   "in field <\"lightSaberColor\"> " +
                                   "but was <\"blue\"> in <Yoda the Jedi>.\n" +
-                                  "Comparison was performed on all fields");
+                                  "Comparison was performed on all fields"
+                                  +"\n"
+                                  +"__EX__org.assertj.core.test.Jedi\n" + 
+                                  "↳ lightSaberColor = [green]__AC__org.assertj.core.test.Jedi\n" + 
+                                  "↳ lightSaberColor = [blue]__EN__"
+    		);
   }
 
 }

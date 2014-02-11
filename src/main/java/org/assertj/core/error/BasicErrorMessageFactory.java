@@ -45,7 +45,7 @@ public class BasicErrorMessageFactory implements ErrorMessageFactory {
 	/**
 	 * Formatted text message for expect and actual values visible in Eclipse IDE
 	 */
-	protected String comparismOptionalMessage;
+	protected String comparismOptionalMessage = "";
 
 	/**
 	 * To avoid quoted String in message format.
@@ -129,7 +129,7 @@ public class BasicErrorMessageFactory implements ErrorMessageFactory {
 	/** {@inheritDoc} */
 	@Override
 	public String create() {
-		return formatter.format(EmptyTextDescription.emptyText(), new StandardRepresentation(), format, arguments);
+		return formatter.format(EmptyTextDescription.emptyText(), new StandardRepresentation(), format, arguments) + comparismOptionalMessage;
 	}
 
 	/**
