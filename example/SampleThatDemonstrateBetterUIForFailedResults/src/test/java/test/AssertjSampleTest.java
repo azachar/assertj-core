@@ -37,12 +37,12 @@ public class AssertjSampleTest {
 	@Test
 	public void newVisualComparismForAnExoticType() {
 		User a = new User();
-		a.setId("a");
+		a.setId("123456789");
 
 		User b = new User();
-		b.setId("b");
+		b.setId("6789");
 
-		assertThat(a).isEqualToIgnoringGivenFields(b);
+		assertThat(a).isEqualToComparingFieldByField(b);
 	}
 	@Test
 	public void clasicCompare() {
