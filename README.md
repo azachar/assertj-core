@@ -1,4 +1,8 @@
-# AssertJ - Fluent assertions for java
+# AssertJ FORK - Fluent assertions for java 
+
+This Fork  allows to visualize changes in a nice way in your IDE.
+
+Here is the original content:
 
 AssertJ provides a rich and intuitive set of strongly-typed assertions to use for unit testing (either with JUnit or TestNG).  
 
