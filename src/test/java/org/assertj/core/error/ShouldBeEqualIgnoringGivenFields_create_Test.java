@@ -22,7 +22,8 @@ import java.util.List;
 
 import org.assertj.core.presentation.StandardRepresentation;
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import org.assertj.core.description.Description;
 import org.assertj.core.description.TextDescription;
 import org.assertj.core.test.Jedi;
@@ -33,6 +34,7 @@ import org.assertj.core.test.Jedi;
  * @author Nicolas François
  * @author Joel Costigliola
  */
+@RunWith(JUnit4.class)
 public class ShouldBeEqualIgnoringGivenFields_create_Test {
 
   private ErrorMessageFactory factory;
@@ -55,8 +57,8 @@ public class ShouldBeEqualIgnoringGivenFields_create_Test {
                                   "Comparison was performed on all fields but <[\"someIgnoredField\"]>"
                                   +"\n"
                                   +"__EX__org.assertj.core.test.Jedi\n" + 
-                                  "↳ name = [Yoda]↳ lightSaberColor = [green]__AC__org.assertj.core.test.Jedi\n" + 
-                                  "↳ name = [Yoda]↳ lightSaberColor = [blue]__EN__"
+                                  "↳ name = [Yoda]\n↳ lightSaberColor = [green]\n__AC__org.assertj.core.test.Jedi\n" + 
+                                  "↳ name = [Yoda]\n↳ lightSaberColor = [blue]\n__EN__"
     		);
   }
 
@@ -72,8 +74,8 @@ public class ShouldBeEqualIgnoringGivenFields_create_Test {
                                   "Comparison was performed on all fields but <[\"someIgnoredField\"]>"
                                   +"\n"
                                   +"__EX__org.assertj.core.test.Jedi\n" + 
-                                  "↳ lightSaberColor = [green]__AC__org.assertj.core.test.Jedi\n" + 
-                                  "↳ lightSaberColor = [blue]__EN__"
+                                  "↳ lightSaberColor = [green]\n__AC__org.assertj.core.test.Jedi\n" + 
+                                  "↳ lightSaberColor = [blue]\n__EN__"
     		);
   }
 
@@ -94,8 +96,8 @@ public class ShouldBeEqualIgnoringGivenFields_create_Test {
                                   "Comparison was performed on all fields"
                                   +"\n"
                                   +"__EX__org.assertj.core.test.Jedi\n" + 
-                                  "↳ name = [Yoda]↳ lightSaberColor = [green]__AC__org.assertj.core.test.Jedi\n" + 
-                                  "↳ name = [Yoda]↳ lightSaberColor = [blue]__EN__"
+                                  "↳ name = [Yoda]\n↳ lightSaberColor = [green]\n__AC__org.assertj.core.test.Jedi\n" + 
+                                  "↳ name = [Yoda]\n↳ lightSaberColor = [blue]\n__EN__"
     		);
   }
 
@@ -112,8 +114,8 @@ public class ShouldBeEqualIgnoringGivenFields_create_Test {
                                   "Comparison was performed on all fields"
                                   +"\n"
                                   +"__EX__org.assertj.core.test.Jedi\n" + 
-                                  "↳ lightSaberColor = [green]__AC__org.assertj.core.test.Jedi\n" + 
-                                  "↳ lightSaberColor = [blue]__EN__"
+                                  "↳ lightSaberColor = [green]\n__AC__org.assertj.core.test.Jedi\n" + 
+                                  "↳ lightSaberColor = [blue]\n__EN__"
     		);
   }
 

@@ -117,7 +117,7 @@ public class ShouldBeEqualToIgnoringFields extends BasicErrorMessageFactory {
 			msg.append(field);
 			msg.append(" = [");
 			msg.append(values.get(i));
-			msg.append("]");
+			msg.append("]\n");
 
 			i++;
 		}
