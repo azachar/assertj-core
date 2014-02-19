@@ -1,25 +1,34 @@
 package test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
-public class AssertjSampleTest {
-
+public class NiceVizualizationOfFailedTestsWithAsserjForkTest {
 	class User {
 		private String id;
 
 		private String name;
 		
-		public String getIgnored() {
+		public String getName() {
 			return name;
 		}
 
-		public void setIgnored(String ignored) {
-			this.name = ignored;
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		private String email;
+		
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
 		}
 
 		public String getId() {
@@ -33,17 +42,22 @@ public class AssertjSampleTest {
 
 	// ENSURE THAT
 	// a)  assert-core 1.6.0.SNAPSHOT is compiled from https://github.com/azachar/assertj-core
-	// b)  you are using the patched version of org.eclipse.jdt.junit4.runtime https://github.com/azachar/org.eclipse.jdt.junit4.runtime/tree/assertj_in_R4_3_1/org.eclipse.jdt.junit4.runtime
+	// b)  you are using the patched version of org.eclipse.jdt.junit4.runtime https://github.com/azachar/org.eclipse.jdt.ui
 	@Test
 	public void newVisualComparismForAnExoticType() {
 		User a = new User();
 		a.setId("123456789");
+		a.setName("Andrej");
+		a.setEmail("andrej@chocolatejar.eu");
 
 		User b = new User();
 		b.setId("6789");
+		b.setName("Matej");
+		b.setEmail("matej@chocolatejar.eu");
 
 		assertThat(a).isEqualToComparingFieldByField(b);
 	}
+	
 	@Test
 	public void clasicCompare() {
 		assertThat("Andrej ZACHAR").isEqualTo("Matej ZACHAR");
